@@ -6,7 +6,10 @@ const ObjectTable = ({objects}) => {
 
     const fields = ["name", "ca_date", "ca_dist", "vrel", "diameter", "magnitude"];
 
-    const rowItems = objects.map(object => <ObjectRow fields={fields} object={object} />)
+    let sortedObjects = [...objects];
+    sortedObjects.sort((a, b) => a.close_approach_data[0].epoch_date_close_approach - b.close_approach_data[0].epoch_date_close_approach);
+
+    const rowItems = sortedObjects.map(object => <ObjectRow fields={fields} object={object} />)
 
     return <table>
         <thead>

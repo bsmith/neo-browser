@@ -14,7 +14,7 @@ const formatters = {
         return Number(object.close_approach_data[0].miss_distance.lunar).toFixed(3) + " LD";
     },
     vrel(object) {
-        return object.close_approach_data[0].relative_velocity.kilometers_per_seconds + " km/s";
+        return Number(object.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2) + " km/s";
     },
     diameter(object) {
         const minMax = object.estimated_diameter.meters;
