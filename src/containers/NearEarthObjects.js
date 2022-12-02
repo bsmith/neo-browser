@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import Calendar from '../components/Calendar';
 import ObjectList from "../components/ObjectList";
+import ObjectTable from '../components/ObjectTable';
 
 const feedURL = (endpoint, {start_date, end_date, api_key}) => {
     const url = new URL(endpoint);
@@ -42,6 +43,7 @@ const NearEarthObjects = ({endpoint, api_key}) => {
     return <section>
         <Calendar defaultValue={startDate} onChange={setStartDate} />
         <p>Status: {fetching ? "Fetching... " + fetching : "fetched"}</p>
+        <ObjectTable objects={objects} />
         <ObjectList objects={objects} />
     </section>
 };
