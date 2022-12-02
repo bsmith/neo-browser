@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import NearEarthObjects from './containers/NearEarthObjects';
 import './App.css';
 
+const ENDPOINT = "https://api.nasa.gov/neo/rest/v1/feed";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return <>
+        <header>
+            <h1>Near Earth Objects</h1>
+        </header>
+        <main>
+            <section>
+                <h2>About</h2>
+            </section>
+
+            <NearEarthObjects endpoint={ENDPOINT} />
+
+        </main>
+        <footer><p>
+            Data is from: "Data-set: All the data is from the NASA JPL Asteroid team (http://neo.jpl.nasa.gov/).".
+            Via https://api.nasa.gov/
+        </p></footer>
+    </>;
 }
 
 export default App;
