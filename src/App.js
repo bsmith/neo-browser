@@ -1,5 +1,6 @@
 import NearEarthObjects from './containers/NearEarthObjects';
 import './App.css';
+import api_key from './nasaKey.mjs';
 
 const ENDPOINT = "https://api.nasa.gov/neo/rest/v1/feed";
 
@@ -13,7 +14,7 @@ function App() {
                 <h2>About</h2>
             </section>
 
-            <NearEarthObjects endpoint={ENDPOINT} />
+            <NearEarthObjects endpoint={ENDPOINT} api_key={api_key} />
 
         </main>
         <footer><p>
