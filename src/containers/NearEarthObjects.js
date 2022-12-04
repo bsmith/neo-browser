@@ -70,10 +70,10 @@ const NearEarthObjects = ({endpoint, api_key}) => {
             .then(() => setFetching(false));
     }, [formValues, endpoint, api_key]);
 
-    return <section>
+    return <section className="NearEarthObjects">
         <h2>Browse upcoming close approaches</h2>
         <SearchForm value={formValues} onChange={setFormValues} />
-        <p>Status: {fetching ? "Fetching... " + fetching : "fetched"}</p>
+        <p className="NearEarthObjects-status">Status: {fetching ? "Fetching... " + fetching : "fetched"}</p>
         <ObjectTable objects={objects} hazardousOnly={formValues.hazardousOnly} />
     </section>
 };
