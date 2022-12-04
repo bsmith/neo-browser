@@ -14,12 +14,20 @@ const feedURL = (endpoint, {start_date, end_date, api_key}) => {
     return url;
 }
 
+/* XXX some kind of cache? */
+let lastFinishedFetch = null;
 const fetchObjects = async (endpoint, args) => {
     const url = feedURL(endpoint, args);
+    if (lastFinishedFetch && lastFinishedFetch.urlHref === url.href) {
+        console.log("fetchObjects using cache");
+        return lastFinishedFetch.objects;
+    }
     const resp = await fetch(url);
     const data = await resp.json();
     console.log("fetchObjects", data);
-    return Object.values(data.near_earth_objects).flat(1);
+    const objects = Object.values(data.near_earth_objects).flat(1);
+    lastFinishedFetch = { urlHref: url.href, objects };
+    return objects;
 }
 
 /* add days of standard/equal length to the starting date */
