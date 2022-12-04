@@ -19,7 +19,7 @@ const ObjectTable = ({objects, hazardousOnly}) => {
     if (!(objects && "map" in objects))
         return <p>Error: { JSON.stringify(objects) }</p>;
 
-    const fields = ["name", "ca_date", "ca_dist", "vrel", "diameter", "magnitude", "hazardous", "debug"];
+    const fields = ["name", "ca_date", "ca_dist", "vrel", "diameter", "magnitude", "hazardous", "visualise", "debug"];
 
     const filteredObjects = hazardousOnly ? objects.filter(object => object.is_potentially_hazardous_asteroid) : objects;
     const sortedObjects = sortedBy(filteredObjects, object => object.close_approach_data[0].epoch_date_close_approach)
@@ -36,6 +36,7 @@ const ObjectTable = ({objects, hazardousOnly}) => {
                 <th>Diameter</th>
                 <th>Magnitude</th>
                 <th>Hazardous?</th>
+                <th>Visualisation</th>
                 <th>Debug</th>
             </tr>
         </thead>

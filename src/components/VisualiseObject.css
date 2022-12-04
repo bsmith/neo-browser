@@ -1,0 +1,15 @@
+.VisualiseObject {
+    /* outline: 1px solid red; */
+    width: 100px;
+    height: 100px;
+    background-color: bisque;
+}
+
+.VisualiseObject .minCircle {
+    fill: gainsboro;
+}
+
+.VisualiseObject .maxCircle {
+    fill: darkgrey;
+    stroke: black;
+}

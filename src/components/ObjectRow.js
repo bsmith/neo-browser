@@ -1,4 +1,5 @@
 import ObjectDebug from "./ObjectDebug";
+import VisualiseObject from '../components/VisualiseObject';
 
 /* NB. There might be multiple close-approaches!
    Need to unwrap this somewhere! XXX */
@@ -20,7 +21,7 @@ const formatters = {
     },
     diameter(object) {
         const minMax = object.estimated_diameter.meters;
-        return Number(minMax.estimated_diameter_min).toFixed(1) + " m - " + Number(minMax.estimated_diameter_max).toFixed(1) + " m";
+        return <>{Number(minMax.estimated_diameter_min).toFixed(1)} m &ndash; {Number(minMax.estimated_diameter_max).toFixed(1)} m</>;
     },
     magnitude(object) {
         return object.absolute_magnitude_h;
@@ -30,6 +31,9 @@ const formatters = {
     },
     debug(object) {
         return <ObjectDebug object={object} />;
+    },
+    visualise(object) {
+        return <VisualiseObject object={object} />;
     }
 }
 
