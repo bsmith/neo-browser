@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Calendar from '../components/Calendar';
+import SearchForm from '../components/SearchForm';
 import ObjectList from "../components/ObjectList";
 import ObjectTable from '../components/ObjectTable';
 
@@ -37,8 +37,15 @@ const addDaysToDate = (date, days) => {
     return date.toISOString().slice(0, 10);
 };
 
+const todaysDate = () => {
+    return new Date().toISOString().slice(0, 10)
+}
+
 const NearEarthObjects = ({endpoint, api_key}) => {
-    const [startDate, setStartDate] = useState("2022-12-02");
+    const [formValues, setFormValues] = useState({
+        startDate: todaysDate(),
+        hazardousOnly: false,
+    });
     const [objects, setObjects] = useState([]);
     /* bad design here: fetching contains null or a message. should really have a bool and a string separately */
     const [fetching, setFetching] = useState(null);
@@ -46,21 +53,21 @@ const NearEarthObjects = ({endpoint, api_key}) => {
     /* XXX Some kind of error handling? */
     useEffect(() => {
         setFetching("fetchObjects");
-        const endDate = addDaysToDate(startDate, 3);
-        fetchObjects(endpoint, {start_date: startDate, end_date: endDate, api_key})
+        const endDate = addDaysToDate(formValues.startDate, 3);
+        fetchObjects(endpoint, {start_date: formValues.startDate, end_date: endDate, api_key})
             .catch((err) => {
                 console.error(err);
                 setFetching(JSON.stringify(err))
             })
             .then(setObjects)
             .then(() => setFetching(false));
-    }, [startDate, endpoint, api_key]);
+    }, [formValues, endpoint, api_key]);
 
     return <section>
         <h2>Browse upcoming close approaches</h2>
-        <Calendar defaultValue={startDate} onChange={setStartDate} />
+        <SearchForm value={formValues} onChange={setFormValues} />
         <p>Status: {fetching ? "Fetching... " + fetching : "fetched"}</p>
-        <ObjectTable objects={objects} />
+        <ObjectTable objects={objects} hazardousOnly={formValues.hazardousOnly} />
         <ObjectList objects={objects} />
     </section>
 };

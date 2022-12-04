@@ -15,13 +15,14 @@ let sortedBy = (array, keyFunc) => {
     return newArray;
 }
 
-const ObjectTable = ({objects}) => {
+const ObjectTable = ({objects, hazardousOnly}) => {
     if (!(objects && "map" in objects))
         return <p>Error: { JSON.stringify(objects) }</p>;
 
     const fields = ["name", "ca_date", "ca_dist", "vrel", "diameter", "magnitude", "hazardous"];
 
-    const sortedObjects = sortedBy(objects, object => object.close_approach_data[0].epoch_date_close_approach)
+    const filteredObjects = hazardousOnly ? objects.filter(object => object.is_potentially_hazardous_asteroid) : objects;
+    const sortedObjects = sortedBy(filteredObjects, object => object.close_approach_data[0].epoch_date_close_approach)
 
     const rowItems = sortedObjects.map(object => <ObjectRow key={object.id} fields={fields} object={object} />)
 
