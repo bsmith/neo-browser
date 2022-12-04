@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import SearchForm from '../components/SearchForm';
-import ObjectList from "../components/ObjectList";
 import ObjectTable from '../components/ObjectTable';
 
 const feedURL = (endpoint, {start_date, end_date, api_key}) => {
@@ -68,7 +67,6 @@ const NearEarthObjects = ({endpoint, api_key}) => {
         <SearchForm value={formValues} onChange={setFormValues} />
         <p>Status: {fetching ? "Fetching... " + fetching : "fetched"}</p>
         <ObjectTable objects={objects} hazardousOnly={formValues.hazardousOnly} />
-        <ObjectList objects={objects} />
     </section>
 };
 

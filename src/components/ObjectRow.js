@@ -1,3 +1,5 @@
+import ObjectDebug from "./ObjectDebug";
+
 /* NB. There might be multiple close-approaches!
    Need to unwrap this somewhere! XXX */
 
@@ -25,6 +27,9 @@ const formatters = {
     },
     hazardous(object) {
         return object.is_potentially_hazardous_asteroid ? "yes" : "no";
+    },
+    debug(object) {
+        return <ObjectDebug object={object} />;
     }
 }
 
