@@ -6,10 +6,18 @@
 }
 
 .VisualiseObject .minCircle {
-    fill: gainsboro;
+    fill: darkgrey;
+    stroke: black;
+    stroke-dasharray: 1.5px;
 }
 
 .VisualiseObject .maxCircle {
-    fill: darkgrey;
+    fill: gainsboro;
+    stroke: black;
+    stroke-dasharray: 1.5px;
+}
+
+.VisualiseObject .avgCircle {
+    fill: none;
     stroke: black;
 }
