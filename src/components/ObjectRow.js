@@ -22,11 +22,14 @@ const formatters = {
     },
     magnitude(object) {
         return object.absolute_magnitude_h;
+    },
+    hazardous(object) {
+        return object.is_potentially_hazardous_asteroid ? "yes" : "no";
     }
 }
 
 const ObjectRow = ({fields, object}) => {
-    const tdItems = fields.map(field => <td>{formatters[field](object)}</td>);
+    const tdItems = fields.map(field => <td key={field}>{formatters[field](object)}</td>);
 
     return <tr>
         { tdItems }

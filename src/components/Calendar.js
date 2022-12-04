@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 
 const Calendar = ({defaultValue, onChange}) => {
     const [localValue, setLocalValue] = useState(defaultValue);
+    const uniqId = useId();
 
     const handleChange = (event) => {
         const value = event.target.value;
@@ -14,7 +15,10 @@ const Calendar = ({defaultValue, onChange}) => {
             onChange(value);
         }
     }
-    return <input type="text" value={localValue} onChange={handleChange} />
+    return <form className="Calendar">
+        <label htmlFor={uniqId + "date"}>Start date:</label>
+        <input id={uniqId + "date"} type="date" value={localValue} onChange={handleChange} />
+    </form>
 }
 
 export default Calendar;
