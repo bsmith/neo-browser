@@ -1,4 +1,5 @@
-import { select, axisBottom, scaleLinear } from 'd3';
+// import { select, axisBottom, scaleLinear } from 'd3';
+import * as d3 from 'd3';
 import { useRef, useLayoutEffect } from 'React';
 import "./VisualiseObject.css";
 
@@ -19,10 +20,10 @@ const VisualiseObject = ({object}) => {
     /* nice d3+React tutorial: https://pganalyze.com/blog/building-svg-components-in-react */
     /* copied this code from there */
     useLayoutEffect(() => {
-        const host = select(d3Ref.current);
+        const host = d3.select(d3Ref.current);
         host.select("g").remove(); /* get rid of old axes */
-        const scale = scaleLinear([0, 2], [0, 50]);
-        const axisGenerator = axisBottom(scale);
+        const scale = d3.scaleLinear([0, 2], [0, 50]);
+        const axisGenerator = d3.axisBottom(scale);
         axisGenerator.ticks(2);
         const group = host.append("g");
         group.call(axisGenerator);
